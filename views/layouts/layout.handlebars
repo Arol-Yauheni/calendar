@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Docume</title>
+	<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <nav>
+          <ul class="nav">
+						{{#if user}}
+              <li><a href="/">Главная</a></li>
+              <li><a href="/users/logout">Выйти</a></li>
+							{{else}}
+              <li><a href="/users/login">Авторизация</a></li>
+              <li><a href="/users/register">Регистрация</a></li>
+							{{/if}}
+          </ul>
+        </nav>
+    </header>
+		<div class="message-container">
+			{{#if success_msg}}
+            <div class="message success"><p>{{success_msg}}</p></div>
+          {{/if}}
+
+          {{#if error_msg}}
+            <div class="message danger"><p>{{error_msg}}</p></div>
+          {{/if}}
+
+          {{#if error}}
+            <div class="message danger"><p>{{error}}</p></div>
+          {{/if}}
+		</div>
+		{{{body}}}
+    <footer>
+      <p>
+        &copy; Календарь событий.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

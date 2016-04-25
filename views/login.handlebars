@@ -1,0 +1,17 @@
+{{#if errors}}
+  {{#each errors}}
+    <div class="message danger">
+      <p>{{msg}}</p>
+    </div>
+  {{/each}}
+{{/if}}
+<h2 class="title">Авторизация</h2>
+<div class="form-container">
+  <form method="post" action="/users/login">
+    <label>Имя</label>
+    <input type="text" name="username" placeholder="Имя">
+    <label>Пароль</label>
+    <input type="password" name="password" placeholder="Пароль">
+    <button type="submit">Войти</button>
+  </form>
+</div>

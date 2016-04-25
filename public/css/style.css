@@ -1,0 +1,103 @@
+@import "reset.css";
+
+body {
+  font-family: sans-serif;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  border-bottom: 1px solid #bbbabb;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav li {
+  margin-left: 25px;
+}
+
+.nav li a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #bbbabb;
+}
+
+.nav li a:hover {
+  color: #000000;
+  transition: 0.5s;
+}
+
+.title {
+  font-size: 35px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  margin-left: 30px;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-container input {
+  width: 100%;
+  margin: 5px 0 20px 0;
+  border-radius: 4px;
+  border-style: groove;
+}
+
+.form-container input[type="text"], .form-container input[type="email"], .form-container input[type="password"] {
+  padding: 5px;
+}
+
+.form-container button {
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px 25px;
+  border-style: groove;
+}
+
+.form-container button:hover {
+  background-color: #eee9e4;
+}
+
+.message {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 5px 0 5px 0;
+}
+
+.message p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.message.success {
+  background-color: #85d583;
+  color:#1a5715;
+}
+
+.message.danger {
+  background-color: #e87e88;
+  color: #940a0a;
+}
+
+footer {
+  margin-top: 90px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #bbbabb;
+}
+
+footer p {
+  margin-left: 30px;
+}
