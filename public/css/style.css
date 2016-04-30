@@ -81,14 +81,26 @@ header {
   margin-right: 10px;
 }
 
-.message.success {
+.success {
   background-color: #85d583;
   color:#1a5715;
 }
 
-.message.danger {
+.danger {
   background-color: #e87e88;
   color: #940a0a;
+}
+
+.google-reg {
+  text-decoration: none;
+  color: #69676a;
+  font-size: 14px;
+  margin-left: 30px;
+}
+
+.google-reg:hover {
+  transition: 1s;
+  color: #38a839;
 }
 
 footer {
