@@ -103,6 +103,74 @@ header {
   color: #38a839;
 }
 
+#calendar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#title-data {
+  width: 100%;
+  display: flex;
+}
+
+#title-date p {
+  text-align: center;
+  padding: 10px 0 10px 0;
+}
+
+.arrow-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.arrow {
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+}
+
+.prev {
+  background-image: url(../image/left-arrow.png);
+  cursor: pointer;
+}
+
+.prev:hover {
+  background-color: #bbbbbb;
+}
+
+.next {
+  background-image: url(../image/right-arrow.png);
+  cursor: pointer;
+}
+
+.next:hover {
+  background-color: #bbbbbb;
+}
+
+.day {
+  width: 170px;
+  box-sizing: border-box;
+  background-color: #e8e9ee;
+}
+
+.day p {
+  padding: 10px 0 10px 0;
+  text-align: center;
+}
+
+.cell {
+  width: 170px;
+  min-height: 100px;
+  border: 1px solid #bbbbbb;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  padding: 4px;
+}
+
 footer {
   margin-top: 90px;
   padding-top: 20px;
