@@ -15,14 +15,12 @@ router.post('/recordAdd', function(req, res){
 	var name = req.body.recordName;
 	var description = req.body.description;
 	var date = req.body.date;
-	var description = req.body.time;
-
+	var time = req.body.time;
 
 	req.checkBody('recordName', 'Введите название события').notEmpty();
 	req.checkBody('description', 'Введите описание').notEmpty();
 	req.checkBody('date', 'Введите дату').notEmpty();
 	req.checkBody('time', 'Введите время').notEmpty();
-
 
 	var errors = req.validationErrors();
 
@@ -31,25 +29,19 @@ router.post('/recordAdd', function(req, res){
 			errors:errors
 		});
 	} else {
-		/*var newRecord = new Record({
-			email:email,
-			username: username,
-			password: password
-		});*/
+		var newRecord = new Record({
+			recordName:name,
+			userName: res.locals.user.username,
+			description:description,
+			date:date,
+			time:time
+		});
 
-	/*	User.getUserByUsername(username, function(err, user){
-			if(err) throw err;
-	   	if(!user){
-				User.createUser(newUser, function(err, user){
-						if(err) throw err;
-				});
-				req.flash('success_msg', 'Вы успешно зарегистрировались');
-				res.redirect('/users/login');
-	   	} else {
-				req.flash('error_msg', 'Пользователь с таким именем уже существует');
-				res.redirect('/users/register');
-			}
-    });*/
+		Record.createRecord(newRecord, function(err, record){
+				if(err) throw err;
+		});
+		req.flash('success_msg', 'Запись успешно добавлена');
+		res.redirect('/');
 	}
 });
 
