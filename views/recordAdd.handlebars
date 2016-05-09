@@ -1,0 +1,25 @@
+{{#if errors}}
+  {{#each errors}}
+    <div class="message danger">
+      <p>{{msg}}</p>
+    </div>
+  {{/each}}
+{{/if}}
+<h2 class="title">Создание новой записи</h2>
+<div class="form-container">
+  <form method="post" action="/recordAdd">
+
+    <label>Название события</label>
+    <input type="text" placeholder="Название" name="recordName">
+
+    <label>Дата</label>
+    <input type="date" name="date">
+
+    <label>Время</label>
+    <input type="time" name="time">
+
+    <label>Описание</label>
+    <textarea type="text" rows="15" placeholder="Описание" name="description"></textarea>
+    <button type="submit">Создать запись</button>
+  </form>
+</div>
