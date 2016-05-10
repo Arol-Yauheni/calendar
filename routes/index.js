@@ -7,6 +7,21 @@ router.get('/', ensureAuthenticated, function(req, res) {
 	res.render('index');
 });
 
+router.get('/api/data/:date', ensureAuthenticated, function(req, res) {
+	var date = req.params.date;
+
+	Record.getAllRecordsByUsername(res.locals.user.username, function(err, record){
+  	if(err) throw err;
+  	if(!record){
+	  	return done(null, false);
+  	}
+		//res.send(JSON.stringify(record));
+		res.send(record);
+	});
+
+	//res.send(JSON.stringify({userName: "b", description: "dfsdf"}));
+});
+
 router.get('/recordAdd', ensureAuthenticated, function(req, res) {
 	res.render('recordAdd');
 });

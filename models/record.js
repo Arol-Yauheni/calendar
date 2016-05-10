@@ -7,7 +7,8 @@ var RecordSchema = mongoose.Schema({
 		index: true
 	},
   userName: {
-    type: String
+    type: String,
+		index: true
   },
 	description: {
 		type: String
@@ -27,11 +28,11 @@ module.exports.createRecord = function(newRecord, callback){
   newRecord.save(callback);
 }
 
-/*module.exports.getUserByUsername = function(username, callback){
-	var query = {username: username};
-	User.findOne(query, callback);
+module.exports.getAllRecordsByUsername = function(username, callback){
+	var query = {userName: username};
+	Record.find(query, callback);
 }
 
-module.exports.getUserById = function(id, callback){
+/*module.exports.getUserById = function(id, callback){
 	User.findById(id, callback);
 }*/

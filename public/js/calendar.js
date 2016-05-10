@@ -3,9 +3,16 @@ function createCalendar(year, month) {
   var elem = document.querySelector('#calendar');
   var titleDate = document.querySelector('#title-date');
 
-  console.log(titleDate);
-
   var date = new Date(year, month);
+
+  var numberOfMonth = date.getMonth();
+  var currYear = date.getFullYear();
+  var dateReq;
+  if (numberOfMonth < 9) {
+    dateReq = currYear + "-0" + (numberOfMonth + 1);
+  } else {
+    dateReq = currYear + "-" + (numberOfMonth + 1);
+  }
 
   var options = {
     year: 'numeric',
@@ -22,7 +29,11 @@ function createCalendar(year, month) {
   }
 
   while (date.getMonth() == month) {
-    template += '<div class="cell"><p>' + date.getDate() + '</p></div>';
+    if (date.getDate() < 10) {
+      template += '<div id="' + dateReq + '-0' + date.getDate() + '" class="cell"><p>' + date.getDate() + '</p></div>';
+    } else {
+      template += '<div id="' + dateReq + '-' + date.getDate() + '" class="cell"><p>' + date.getDate() + '</p></div>';
+    }
     date.setDate(date.getDate() + 1);
   }
 
@@ -32,6 +43,18 @@ function createCalendar(year, month) {
     }
   }
   elem.innerHTML = template;
+
+  $.get("/api/data/" + dateReq, success, "json");
+}
+
+function success(data) {
+  for (var i = 0; i < data.length; i++) {
+    var selector = "#" + data[i].date;
+    if (document.querySelector(selector)) {
+      console.log(data[i].date);
+    }
+  }
+  console.log(data);
 }
 
 function getDay(date) {
@@ -50,20 +73,15 @@ $(document).ready( function () {
 
   createCalendar(currentYear, currentMonth);
 
-  console.log(currentMonth);
-
   var prevArrow = document.querySelector('.prev');
   prevArrow.addEventListener('click', function (e) {
     currentMonth -= 1;
     createCalendar(currentYear, currentMonth);
-    console.log(currentMonth);
   });
-
 
   var nextArrow = document.querySelector('.next');
   nextArrow.addEventListener('click', function (e) {
     currentMonth += 1;
-    console.log(currentMonth);
     createCalendar(currentYear, currentMonth);
   });
 
