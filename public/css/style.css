@@ -201,6 +201,17 @@ textarea {
   padding: 5px;
 }
 
+.record-wrapper {
+  background-color: #fa844a;
+  padding: 3px;
+  margin-bottom: 3px;
+}
+
+.record-wrapper a {
+  text-decoration: none;
+  color: #3d3e41;
+}
+
 footer {
   margin-top: 90px;
   padding-top: 20px;

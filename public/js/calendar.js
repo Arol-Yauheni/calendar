@@ -22,7 +22,13 @@ function createCalendar(year, month) {
   var templateDate = '<p>' + date.toLocaleString("ru", options) + '</p>';
   titleDate.innerHTML = templateDate;
 
-  var template = '<div class="day"><p>ПН</p></div><div class="day"><p>ВТ</p></div><div class="day"><p>СР</p></div><div class="day"><p>ЧТ</p></div><div class="day"><p>ПТ</p></div> <div class="day"><p>СБ</p></div><div class="day"><p>ВС</p></div>';
+  var template = '<div class="day"><p>ПН</p></div>';
+  template += '<div class="day"><p>ВТ</p></div>';
+  template += '<div class="day"><p>СР</p></div>';
+  template += '<div class="day"><p>ЧТ</p></div>';
+  template += '<div class="day"><p>ПТ</p></div>';
+  template += '<div class="day"><p>СБ</p></div>';
+  template += '<div class="day"><p>ВС</p></div>';
 
   for (var i = 0; i < getDay(date); i++) {
     template += '<div class="cell"></div>';
@@ -49,12 +55,14 @@ function createCalendar(year, month) {
 
 function success(data) {
   for (var i = 0; i < data.length; i++) {
-    var selector = "#" + data[i].date;
-    if (document.querySelector(selector)) {
-      console.log(data[i].date);
+    var selector = data[i].date;
+    if (document.getElementById(selector)) {
+      var element = document.getElementById(selector);
+      var div = '<div class="record-wrapper"><a href="#" title="Подробнее"><p>' + data[i].recordName + '</p></a></div>';
+      element.insertAdjacentHTML("beforeEnd", div);
+      console.dir(element);
     }
   }
-  console.log(data);
 }
 
 function getDay(date) {
@@ -74,14 +82,25 @@ $(document).ready( function () {
   createCalendar(currentYear, currentMonth);
 
   var prevArrow = document.querySelector('.prev');
+
   prevArrow.addEventListener('click', function (e) {
-    currentMonth -= 1;
+    if (currentMonth === 0) {
+      currentMonth = 11;
+      currentYear -= 1;
+    } else {
+      currentMonth -= 1;
+    }
     createCalendar(currentYear, currentMonth);
   });
 
   var nextArrow = document.querySelector('.next');
   nextArrow.addEventListener('click', function (e) {
-    currentMonth += 1;
+    if (currentMonth === 11) {
+      currentMonth = 0;
+      currentYear += 1;
+    } else {
+      currentMonth += 1;
+    }
     createCalendar(currentYear, currentMonth);
   });
 
