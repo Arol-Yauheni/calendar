@@ -15,11 +15,24 @@ router.get('/api/data/:date', ensureAuthenticated, function(req, res) {
   	if(!record){
 	  	return done(null, false);
   	}
-		//res.send(JSON.stringify(record));
 		res.send(record);
 	});
+});
 
-	//res.send(JSON.stringify({userName: "b", description: "dfsdf"}));
+router.get('/viewInf/:eventId', ensureAuthenticated, function(req, res) {
+	var evId = req.params.eventId;
+	Record.getRecordById(evId, function(err, record) {
+		if(err) throw err;
+ 	  if(!record) {
+ 		 return done(null, false);
+ 	  }
+		res.render('viewInf', {
+			name: record.recordName,
+			date: record.date,
+			time: record.time,
+			description: record.description
+		});
+	});
 });
 
 router.get('/recordAdd', ensureAuthenticated, function(req, res) {

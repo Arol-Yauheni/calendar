@@ -58,9 +58,8 @@ function success(data) {
     var selector = data[i].date;
     if (document.getElementById(selector)) {
       var element = document.getElementById(selector);
-      var div = '<div class="record-wrapper"><a href="#" title="Подробнее"><p>' + data[i].recordName + '</p></a></div>';
+      var div = '<div class="record-wrapper"><a href="/viewInf/'+ data[i]._id +'" title="Подробнее"><p>' + data[i].recordName + '</p></a></div>';
       element.insertAdjacentHTML("beforeEnd", div);
-      console.dir(element);
     }
   }
 }

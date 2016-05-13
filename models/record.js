@@ -24,15 +24,16 @@ var RecordSchema = mongoose.Schema({
 var Record = module.exports = mongoose.model('Record', RecordSchema);
 
 
-module.exports.createRecord = function(newRecord, callback){
+module.exports.createRecord = function(newRecord, callback) {
   newRecord.save(callback);
 }
 
-module.exports.getAllRecordsByUsername = function(username, callback){
+module.exports.getAllRecordsByUsername = function(username, callback) {
 	var query = {userName: username};
 	Record.find(query, callback);
 }
 
-/*module.exports.getUserById = function(id, callback){
-	User.findById(id, callback);
-}*/
+module.exports.getRecordById = function(id, callback) {
+	var query = { _id: id};
+	Record.findOne(query, callback);
+}
