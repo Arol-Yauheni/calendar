@@ -36,8 +36,9 @@ router.get('/api/addNewUser/:currName/:evId', ensureAuthenticated, function(req,
 	 	  if(!rec) {
 	 		 return done(null, false);
 	 	  }
-			res.render('viewInf', {success_msg: 'Новый участник успешно добавлен'});
+			res.redirect('/viewInf/' + evId);
 		});
+		//res.render('viewInf', {success_msg: 'Новый участник успешно добавлен'});		
 	});
 });
 
@@ -66,8 +67,6 @@ router.get('/viewInf/:eventId', ensureAuthenticated, function(req, res) {
 			for (var i = 0; i < record.usersName.length; i++) {
 				freeUsers.members.push({username: record.usersName[i]});
 			}
-
-			console.log(freeUsers.members);
 			for (var i = 0; i < users.length; i++) {
 				var check = 0;
 				for (var j = 0; j < record.usersName.length; j++) {
@@ -82,16 +81,6 @@ router.get('/viewInf/:eventId', ensureAuthenticated, function(req, res) {
 					}
 				}
 			}
-			/*for (var i = 0; i < record.usersName.length; i++) {
-				for (var j = 0; j < users.length; j++) {
-					if(record.usersName[i] !== users[j].username) {
-						freeUsers.users.push({
-							username: users[j].username,
-							evId: evId
-						});
-					}
-				}
-			}*/
 			res.render('viewInf', freeUsers);
 		});
 	});

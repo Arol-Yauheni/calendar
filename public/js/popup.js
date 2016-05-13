@@ -7,4 +7,10 @@ $(document).ready( function () {
     popup.style.display = "block";
   });
 
+  var closeBtn = document.getElementById('button-close');
+
+  closeBtn.addEventListener('click', function (e) {
+    popup.style.display = "none";
+  });
+
 });
