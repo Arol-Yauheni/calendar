@@ -258,6 +258,19 @@ textarea {
   margin-left: 30px;
 }
 
+.users-popup {
+  width: 1150px;
+  height: 500px;
+  border: 1px solid #646565;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px;
+  margin-left: -575px;
+  background-color: #f7f6f6;
+  display: none;
+}
+
 footer {
   margin-top: 90px;
   padding-top: 20px;
