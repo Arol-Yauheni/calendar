@@ -19,16 +19,16 @@
     {{/if}}
   </div>
 
-  <span class="button-del">
+  <a class="button-del" href="/api/delRecord/{{eventId}}">
     Отказаться
-  </span>
+  </a>
 
   <span id="add-members" class="button-add">
     Добавить нового участника
   </span>
 </div>
 <div id="users-popup" class="users-popup">
-  <h1 class="popup-title">Добавление новых участников</h1>
+  <h1 class="popup-title">Список потенциальных участников</h1>
   {{#if users}}
     {{#each users}}
       <a href="/api/addNewUser/{{username}}/{{evId}}" class="freeUser">{{username}}</a>

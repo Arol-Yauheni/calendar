@@ -20,6 +20,25 @@ router.get('/api/data/:date', ensureAuthenticated, function(req, res) {
 	});
 });
 
+router.get('/api/delRecord/:evId', ensureAuthenticated, function(req, res) {
+	var evId = req.params.evId;
+
+	Record.getRecordById(evId, function(err, record) {
+		if(err) throw err;
+ 	  if(!record) {
+ 		 return done(null, false);
+ 	  }
+		record.update({$pull:{usersName: res.locals.user.username}}, function(err, rec) {
+			if(err) throw err;
+	 	  if(!rec) {
+	 		 return done(null, false);
+		 	}
+			req.flash('success_msg', 'Вы отказались от участия в событии');
+			res.redirect('/viewInf/' + evId);
+		});
+	});
+});
+
 router.get('/api/addNewUser/:currName/:evId', ensureAuthenticated, function(req, res) {
 	var name = req.params.currName;
 	var evId = req.params.evId;
@@ -31,14 +50,11 @@ router.get('/api/addNewUser/:currName/:evId', ensureAuthenticated, function(req,
  	  }
 		record.usersName.push(name);
 
-		Record.addUserInRecord(record, function(err, rec) {
+		Record.addUserInRecord(record, function(err) {
 			if(err) throw err;
-	 	  if(!rec) {
-	 		 return done(null, false);
-	 	  }
+			req.flash('success_msg', 'Новый участник успешно добавлен');
 			res.redirect('/viewInf/' + evId);
 		});
-		//res.render('viewInf', {success_msg: 'Новый участник успешно добавлен'});		
 	});
 });
 
@@ -60,6 +76,7 @@ router.get('/viewInf/:eventId', ensureAuthenticated, function(req, res) {
 				date: record.date,
 				time: record.time,
 				description: record.description,
+				eventId: evId,
 				members: [],
 				users: []
 			};

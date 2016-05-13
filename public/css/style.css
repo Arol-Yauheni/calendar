@@ -247,6 +247,7 @@ textarea {
   border-radius: 4px;
   padding: 10px 25px;
   border-style: groove;
+  text-decoration: none;
 }
 
 .button-del:hover {
@@ -256,6 +257,10 @@ textarea {
 .wrapper .button-del {
   margin-right: 20px;
   margin-left: 30px;
+}
+
+.members-container p {
+  margin-top: 3px;
 }
 
 .users-popup {
