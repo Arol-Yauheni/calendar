@@ -246,7 +246,6 @@ textarea {
   border-radius: 4px;
   padding: 10px 25px;
   border-style: groove;
-  text-decoration: none;
 }
 
 .button-del:hover {
@@ -267,8 +266,31 @@ textarea {
   left: 50%;
   margin-top: -250px;
   margin-left: -575px;
-  background-color: #f7f6f6;
+  background-color: #ffffff;
   display: none;
+  overflow-y: scroll;
+}
+
+.freeUser{
+  padding: 5px 20px 5px;
+  background-color: #f7f6f6;
+  margin-top: 3px;
+  width: 100%;
+  text-decoration: none;
+  display: block;
+  color: #1a1b1a;
+  box-sizing: border-box;
+}
+
+.freeUser:hover{
+  border: 1px solid #bff0b3;
+}
+
+.popup-title {
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f6f4bc;
 }
 
 footer {

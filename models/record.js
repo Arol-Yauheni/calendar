@@ -6,10 +6,10 @@ var RecordSchema = mongoose.Schema({
 		type: String,
 		index: true
 	},
-  userName: {
+  usersName: [{
     type: String,
 		index: true
-  },
+  }],
 	description: {
 		type: String
 	},
@@ -28,8 +28,12 @@ module.exports.createRecord = function(newRecord, callback) {
   newRecord.save(callback);
 }
 
+module.exports.addUserInRecord = function(record, callback) {
+  record.save(callback);
+}
+
 module.exports.getAllRecordsByUsername = function(username, callback) {
-	var query = {userName: username};
+	var query = {usersName: username};
 	Record.find(query, callback);
 }
 

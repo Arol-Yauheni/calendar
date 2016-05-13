@@ -54,6 +54,7 @@ function createCalendar(year, month) {
 }
 
 function success(data) {
+  console.dir(data);
   for (var i = 0; i < data.length; i++) {
     var selector = data[i].date;
     if (document.getElementById(selector)) {

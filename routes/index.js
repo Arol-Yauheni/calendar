@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var Record = require('../models/record');
+var User = require('../models/user');
 
 router.get('/', ensureAuthenticated, function(req, res) {
 	res.render('index');
@@ -19,6 +20,27 @@ router.get('/api/data/:date', ensureAuthenticated, function(req, res) {
 	});
 });
 
+router.get('/api/addNewUser/:currName/:evId', ensureAuthenticated, function(req, res) {
+	var name = req.params.currName;
+	var evId = req.params.evId;
+
+	Record.getRecordById(evId, function(err, record) {
+		if(err) throw err;
+ 	  if(!record) {
+ 		 return done(null, false);
+ 	  }
+		record.usersName.push(name);
+
+		Record.addUserInRecord(record, function(err, rec) {
+			if(err) throw err;
+	 	  if(!rec) {
+	 		 return done(null, false);
+	 	  }
+			res.render('viewInf', {success_msg: 'Новый участник успешно добавлен'});
+		});
+	});
+});
+
 router.get('/viewInf/:eventId', ensureAuthenticated, function(req, res) {
 	var evId = req.params.eventId;
 	Record.getRecordById(evId, function(err, record) {
@@ -26,11 +48,51 @@ router.get('/viewInf/:eventId', ensureAuthenticated, function(req, res) {
  	  if(!record) {
  		 return done(null, false);
  	  }
-		res.render('viewInf', {
-			name: record.recordName,
-			date: record.date,
-			time: record.time,
-			description: record.description
+
+		User.getAllUsers(function(err, users) {
+			if(err) throw err;
+	 	  if(!users) {
+	 		 return done(null, false);
+	 	  }
+			var freeUsers = {
+				name: record.recordName,
+				date: record.date,
+				time: record.time,
+				description: record.description,
+				members: [],
+				users: []
+			};
+
+			for (var i = 0; i < record.usersName.length; i++) {
+				freeUsers.members.push({username: record.usersName[i]});
+			}
+
+			console.log(freeUsers.members);
+			for (var i = 0; i < users.length; i++) {
+				var check = 0;
+				for (var j = 0; j < record.usersName.length; j++) {
+					if(users[i].username !== record.usersName[j]) {
+						check++;
+						if(check === record.usersName.length){
+							freeUsers.users.push({
+								username: users[i].username,
+								evId: evId
+							});
+						}
+					}
+				}
+			}
+			/*for (var i = 0; i < record.usersName.length; i++) {
+				for (var j = 0; j < users.length; j++) {
+					if(record.usersName[i] !== users[j].username) {
+						freeUsers.users.push({
+							username: users[j].username,
+							evId: evId
+						});
+					}
+				}
+			}*/
+			res.render('viewInf', freeUsers);
 		});
 	});
 });
@@ -51,7 +113,6 @@ router.post('/recordAdd', function(req, res){
 	req.checkBody('time', 'Введите время').notEmpty();
 
 	var errors = req.validationErrors();
-
 	if(errors){
 		res.render('recordAdd',{
 			errors:errors
@@ -59,7 +120,7 @@ router.post('/recordAdd', function(req, res){
 	} else {
 		var newRecord = new Record({
 			recordName:name,
-			userName: res.locals.user.username,
+			usersName: res.locals.user.username,
 			description:description,
 			date:date,
 			time:time

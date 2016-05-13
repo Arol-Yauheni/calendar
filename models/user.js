@@ -30,6 +30,10 @@ module.exports.getUserByUsername = function(username, callback){
 	User.findOne(query, callback);
 }
 
+module.exports.getAllUsers = function(callback){
+	User.find(callback);
+}
+
 module.exports.getUserById = function(id, callback){
 	User.findById(id, callback);
 }

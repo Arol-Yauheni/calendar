@@ -12,19 +12,28 @@
   </div>
   <div class="members-container">
     <h3 class="event-title">Участники:</h3>
-
+    {{#if members}}
+      {{#each members}}
+        <p>{{username}}</p>
+      {{/each}}
+    {{/if}}
   </div>
 
-  <a class="button-del" href="">
+  <span class="button-del" href="">
     Отказаться
-  </a>
+  </span>
 
-  <a id="add-members" class="button-add" href="">
+  <span id="add-members" class="button-add">
     Добавить нового участника
-  </a>
+  </span>
 </div>
 <div id="users-popup" class="users-popup">
-
+  <h1 class="popup-title">Добавление новых участников</h1>
+  {{#if users}}
+    {{#each users}}
+      <a href="/api/addNewUser/{{username}}/{{evId}}" class="freeUser">{{username}}</a>
+    {{/each}}
+  {{/if}}
 </div>
 
-<script src="/js/members.js"></script>
+<script src="/js/popup.js"></script>
